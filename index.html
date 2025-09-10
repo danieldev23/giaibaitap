@@ -3,556 +3,375 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hướng dẫn chi tiết từng bước</title>
+    <title>Mô hình lập lịch ca làm việc</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             margin: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            background-color: #f5f5f5;
         }
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         h1 {
             color: #2c3e50;
             text-align: center;
-            margin-bottom: 40px;
-            font-size: 2.5em;
-            background: linear-gradient(45deg, #3498db, #2980b9);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
         }
         h2 {
             color: #34495e;
-            border-left: 5px solid #3498db;
-            padding-left: 15px;
-            margin-top: 40px;
-            font-size: 1.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
         }
-        h3 {
-            color: #2c3e50;
-            margin-top: 25px;
-        }
-        .step-box {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 10px;
-            padding: 25px;
-            margin: 20px 0;
-            border-left: 6px solid #3498db;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .formula-box {
-            background: #2c3e50;
-            color: #ecf0f1;
+        .section {
+            margin-bottom: 30px;
             padding: 20px;
+            background: #f8f9fa;
             border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            margin: 15px 0;
-            border-left: 4px solid #e74c3c;
-            overflow-x: auto;
+            border-left: 4px solid #3498db;
         }
-        .excel-table {
+        table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 15px 0;
             background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .excel-table th {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-            padding: 12px;
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
             text-align: center;
-            font-weight: bold;
         }
-        .excel-table td {
-            border: 1px solid #bdc3c7;
-            padding: 10px;
-            text-align: center;
-            position: relative;
-        }
-        .cell-ref {
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            font-size: 10px;
-            color: #7f8c8d;
-        }
-        .highlight-yellow {
-            background-color: #f1c40f !important;
-            color: #2c3e50;
-            font-weight: bold;
-        }
-        .highlight-green {
-            background-color: #2ecc71 !important;
+        th {
+            background-color: #3498db;
             color: white;
             font-weight: bold;
         }
-        .highlight-blue {
-            background-color: #3498db !important;
-            color: white;
-        }
-        .warning-box {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 15px 0;
-            border-left: 4px solid #f39c12;
-        }
-        .success-box {
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 15px 0;
-            border-left: 4px solid #28a745;
-        }
-        .solver-settings {
+        .formula {
             background: #e8f4f8;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 15px 0;
-            border-left: 4px solid #17a2b8;
-        }
-        .code-inline {
-            background: #ecf0f1;
-            padding: 3px 6px;
-            border-radius: 3px;
+            padding: 15px;
+            border-radius: 5px;
             font-family: 'Courier New', monospace;
-            color: #2c3e50;
+            margin: 10px 0;
+            border-left: 4px solid #2980b9;
         }
-        .screenshot-placeholder {
-            background: #f8f9fa;
-            border: 2px dashed #dee2e6;
-            padding: 40px;
-            text-align: center;
-            border-radius: 8px;
-            margin: 20px 0;
-            color: #6c757d;
+        .step {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #27ae60;
+        }
+        .important {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #f39c12;
+            margin: 10px 0;
+        }
+        .constraint {
+            background: #f8d7da;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            border-left: 4px solid #dc3545;
+        }
+        .objective {
+            background: #d1ecf1;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #17a2b8;
+            margin: 10px 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🔧 HƯỚNG DẪN CHI TIẾT TỪNG BƯỚC</h1>
+        <h1>🏢 MÔ HÌNH LẬP LỊCH CA LÀM VIỆC NGÂN HÀNG</h1>
         
-        <div class="step-box">
-            <h2>📊 BƯỚC 1: TẠO CẤU TRÚC EXCEL</h2>
+        <div class="section">
+            <h2>📊 1. Dữ liệu đầu vào</h2>
             
-            <h3>1.1. Mở Excel và tạo sheet mới</h3>
-            <p>• Tên sheet: <strong>"Lap_Lich_Ca"</strong></p>
+            <h3>Nhu cầu nhân lực theo khung giờ:</h3>
+            <table>
+                <tr>
+                    <th>Khung thời gian</th>
+                    <th>Số giao dịch viên cần thiết</th>
+                </tr>
+                <tr><td>9am - 10am</td><td>10</td></tr>
+                <tr><td>10am - 11am</td><td>12</td></tr>
+                <tr><td>11am - 12pm</td><td>14</td></tr>
+                <tr><td>12pm - 1pm</td><td>16</td></tr>
+                <tr><td>1pm - 2pm</td><td>18</td></tr>
+                <tr><td>2pm - 3pm</td><td>17</td></tr>
+                <tr><td>3pm - 4pm</td><td>15</td></tr>
+                <tr><td>4pm - 5pm</td><td>10</td></tr>
+            </table>
             
-            <h3>1.2. Nhập tiêu đề và cấu trúc cơ bản</h3>
-            
-            <table class="excel-table">
+            <h3>Các ca làm việc:</h3>
+            <table>
                 <tr>
-                    <th style="width:80px;">Ô</th>
-                    <th>Nội dung nhập vào</th>
-                    <th>Giải thích</th>
+                    <th>Ca làm việc</th>
+                    <th>Thời gian bắt đầu</th>
+                    <th>Thời gian kết thúc</th>
+                    <th>Số giờ làm việc</th>
                 </tr>
-                <tr>
-                    <td>A1</td>
-                    <td><strong>BẢNG LỊCH LÀM VIỆC NGÂN HÀNG</strong></td>
-                    <td>Tiêu đề chính</td>
-                </tr>
-                <tr>
-                    <td>A3</td>
-                    <td><strong>MA TRẬN CA LÀM VIỆC</strong></td>
-                    <td>Tiêu đề phần 1</td>
-                </tr>
-                <tr>
-                    <td>A5</td>
-                    <td>Ca \ Khung giờ</td>
-                    <td>Nhãn góc trái</td>
-                </tr>
+                <tr><td>Ca 1</td><td>9:00</td><td>13:00</td><td>4 giờ</td></tr>
+                <tr><td>Ca 2</td><td>10:00</td><td>14:00</td><td>4 giờ</td></tr>
+                <tr><td>Ca 3</td><td>11:00</td><td>15:00</td><td>4 giờ</td></tr>
+                <tr><td>Ca 4</td><td>12:00</td><td>16:00</td><td>4 giờ</td></tr>
+                <tr><td>Ca 5</td><td>13:00</td><td>17:00</td><td>4 giờ</td></tr>
             </table>
         </div>
 
-        <div class="step-box">
-            <h2>🕐 BƯỚC 2: TẠO MA TRẬN KHUNG GIỜ</h2>
+        <div class="section">
+            <h2>🎯 2. Thiết lập mô hình trong Excel</h2>
             
-            <h3>2.1. Nhập các khung giờ (Dòng 5)</h3>
-            
-            <table class="excel-table">
-                <tr>
-                    <th>A5</th><th>B5</th><th>C5</th><th>D5</th><th>E5</th><th>F5</th><th>G5</th><th>H5</th><th>I5</th>
-                </tr>
-                <tr>
-                    <td>Ca \ Giờ</td><td class="highlight-blue">9-10</td><td class="highlight-blue">10-11</td>
-                    <td class="highlight-blue">11-12</td><td class="highlight-blue">12-13</td><td class="highlight-blue">13-14</td>
-                    <td class="highlight-blue">14-15</td><td class="highlight-blue">15-16</td><td class="highlight-blue">16-17</td>
-                </tr>
-            </table>
-
-            <div class="formula-box">
-Cách nhập:
-- Click vào ô B5, gõ: 9-10
-- Tab sang C5, gõ: 10-11  
-- Tab sang D5, gõ: 11-12
-- Tiếp tục cho đến I5: 16-17
+            <div class="step">
+                <h3>Bước 1: Tạo bảng ma trận ca làm việc</h3>
+                <p>Tạo bảng cho biết ca nào hoạt động trong khung giờ nào (1 = có, 0 = không):</p>
+                
+                <table>
+                    <tr>
+                        <th>Ca \ Khung giờ</th>
+                        <th>9-10</th>
+                        <th>10-11</th>
+                        <th>11-12</th>
+                        <th>12-13</th>
+                        <th>13-14</th>
+                        <th>14-15</th>
+                        <th>15-16</th>
+                        <th>16-17</th>
+                    </tr>
+                    <tr><td>Ca 1 (9-13)</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                    <tr><td>Ca 2 (10-14)</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+                    <tr><td>Ca 3 (11-15)</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+                    <tr><td>Ca 4 (12-16)</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+                    <tr><td>Ca 5 (13-17)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                </table>
             </div>
 
-            <h3>2.2. Nhập thông tin các ca (Dòng 6-10)</h3>
-            
-            <table class="excel-table">
-                <tr>
-                    <th>Ca</th><th>9-10</th><th>10-11</th><th>11-12</th><th>12-13</th><th>13-14</th><th>14-15</th><th>15-16</th><th>16-17</th>
-                </tr>
-                <tr>
-                    <td><strong>Ca 1 (9-13h)</strong></td>
-                    <td class="highlight-green">1</td><td class="highlight-green">1</td><td class="highlight-green">1</td><td class="highlight-green">1</td>
-                    <td>0</td><td>0</td><td>0</td><td>0</td>
-                </tr>
-                <tr>
-                    <td><strong>Ca 2 (10-14h)</strong></td>
-                    <td>0</td><td class="highlight-green">1</td><td class="highlight-green">1</td><td class="highlight-green">1</td><td class="highlight-green">1</td>
-                    <td>0</td><td>0</td><td>0</td>
-                </tr>
-                <tr>
-                    <td><strong>Ca 3 (11-15h)</strong></td>
-                    <td>0</td><td>0</td><td class="highlight-green">1</td><td class="highlight-green">1</td><td class="highlight-green">1</td><td class="highlight-green">1</td>
-                    <td>0</td><td>0</td>
-                </tr>
-                <tr>
-                    <td><strong>Ca 4 (12-16h)</strong></td>
-                    <td>0</td><td>0</td><td>0</td><td class="highlight-green">1</td><td class="highlight-green">1</td><td class="highlight-green">1</td><td class="highlight-green">1</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td><strong>Ca 5 (13-17h)</strong></td>
-                    <td>0</td><td>0</td><td>0</td><td>0</td><td class="highlight-green">1</td><td class="highlight-green">1</td><td class="highlight-green">1</td><td class="highlight-green">1</td>
-                </tr>
-            </table>
-
-            <div class="formula-box">
-Chi tiết nhập từng ô:
-
-Dòng 6 (Ca 1):
-A6: Ca 1 (9-13h)    B6: 1    C6: 1    D6: 1    E6: 1    F6: 0    G6: 0    H6: 0    I6: 0
-
-Dòng 7 (Ca 2):  
-A7: Ca 2 (10-14h)   B7: 0    C7: 1    D7: 1    E7: 1    F7: 1    G7: 0    H7: 0    I7: 0
-
-Dòng 8 (Ca 3):
-A8: Ca 3 (11-15h)   B8: 0    C8: 0    D8: 1    E8: 1    F8: 1    G8: 1    H8: 0    I8: 0
-
-Dòng 9 (Ca 4):
-A9: Ca 4 (12-16h)   B9: 0    C9: 0    D9: 0    E9: 1    F9: 1    G9: 1    H9: 1    I9: 0
-
-Dòng 10 (Ca 5):
-A10: Ca 5 (13-17h)  B10: 0   C10: 0   D10: 0   E10: 0   F10: 1   G10: 1   H10: 1   I10: 1
+            <div class="step">
+                <h3>Bước 2: Tạo biến quyết định</h3>
+                <p>Tạo dòng cho số người trong mỗi ca (đây là biến cần tối ưu):</p>
+                
+                <table>
+                    <tr>
+                        <th>Biến quyết định</th>
+                        <th>Ca 1</th>
+                        <th>Ca 2</th>
+                        <th>Ca 3</th>
+                        <th>Ca 4</th>
+                        <th>Ca 5</th>
+                    </tr>
+                    <tr><td>Số người (x1, x2, x3, x4, x5)</td><td>[Cell B15]</td><td>[Cell C15]</td><td>[Cell D15]</td><td>[Cell E15]</td><td>[Cell F15]</td></tr>
+                </table>
             </div>
 
-            <div class="warning-box">
-                <strong>⚠️ Giải thích MA TRẬN:</strong><br>
-                • Số <strong>1</strong> = Ca đó hoạt động trong khung giờ đó<br>
-                • Số <strong>0</strong> = Ca đó KHÔNG hoạt động trong khung giờ đó<br>
-                • Ví dụ: Ca 1 (9-13h) có 1 ở cột 9-10, 10-11, 11-12, 12-13 và có 0 ở các cột khác
+            <div class="step">
+                <h3>Bước 3: Tính số người phục vụ trong mỗi khung giờ</h3>
+                <p>Sử dụng hàm SUMPRODUCT để tính:</p>
+                
+                <div class="formula">
+                    Ô B17 (9-10h): =SUMPRODUCT($B$15:$F$15,B7:F7)<br>
+                    Ô C17 (10-11h): =SUMPRODUCT($B$15:$F$15,B8:F8)<br>
+                    Ô D17 (11-12h): =SUMPRODUCT($B$15:$F$15,B9:F9)<br>
+                    ...và tiếp tục cho các khung giờ khác
+                </div>
             </div>
         </div>
 
-        <div class="step-box">
-            <h2>🎯 BƯỚC 3: TẠO BIẾN QUYẾT ĐỊNH</h2>
+        <div class="section">
+            <h2>⚙️ 3. Thiết lập Solver</h2>
             
-            <h3>3.1. Tạo dòng biến quyết định (Dòng 12)</h3>
-            
-            <table class="excel-table">
-                <tr>
-                    <th>A12</th><th>B12</th><th>C12</th><th>D12</th><th>E12</th><th>F12</th>
-                </tr>
-                <tr>
-                    <td><strong>Số người mỗi ca</strong></td>
-                    <td class="highlight-yellow">0</td><td class="highlight-yellow">0</td><td class="highlight-yellow">0</td><td class="highlight-yellow">0</td><td class="highlight-yellow">0</td>
-                </tr>
-            </table>
-
-            <div class="formula-box">
-Nhập vào:
-A12: Số người mỗi ca
-B12: 0  (này sẽ thay đổi khi chạy Solver)
-C12: 0  (này sẽ thay đổi khi chạy Solver)  
-D12: 0  (này sẽ thay đổi khi chạy Solver)
-E12: 0  (này sẽ thay đổi khi chạy Solver)
-F12: 0  (này sẽ thay đổi khi chạy Solver)
+            <div class="objective">
+                <h3>🎯 Hàm mục tiêu:</h3>
+                <strong>Minimize: =SUM(B15:F15)</strong><br>
+                <em>Tối thiểu hóa tổng số nhân viên cần thuê</em>
             </div>
 
-            <div class="success-box">
-                <strong>✅ Ý nghĩa:</strong> Đây chính là những con số mà Solver sẽ tìm ra cho chúng ta!<br>
-                B12 = Số người làm Ca 1<br>
-                C12 = Số người làm Ca 2<br>
-                D12 = Số người làm Ca 3<br>
-                E12 = Số người làm Ca 4<br>
-                F12 = Số người làm Ca 5
+            <div class="constraint">
+                <h3>📋 Ràng buộc 1: Đảm bảo đủ nhân lực</h3>
+                <ul>
+                    <li>B17 >= 10 (9-10h cần ít nhất 10 người)</li>
+                    <li>C17 >= 12 (10-11h cần ít nhất 12 người)</li>
+                    <li>D17 >= 14 (11-12h cần ít nhất 14 người)</li>
+                    <li>E17 >= 16 (12-13h cần ít nhất 16 người)</li>
+                    <li>F17 >= 18 (13-14h cần ít nhất 18 người)</li>
+                    <li>G17 >= 17 (14-15h cần ít nhất 17 người)</li>
+                    <li>H17 >= 15 (15-16h cần ít nhất 15 người)</li>
+                    <li>I17 >= 10 (16-17h cần ít nhất 10 người)</li>
+                </ul>
+            </div>
+
+            <div class="constraint">
+                <h3>📋 Ràng buộc 2: Biến không âm và nguyên</h3>
+                <ul>
+                    <li>B15:F15 >= 0</li>
+                    <li>B15:F15 = Integer</li>
+                </ul>
+            </div>
+
+            <div class="constraint">
+                <h3>📋 Ràng buộc 3: Điều kiện thực tế bổ sung</h3>
+                <ul>
+                    <li><strong>Mỗi nhân viên làm đúng 1 ca/ngày:</strong> Không áp dụng vì đây là tối ưu số ca, không phải cá nhân</li>
+                    <li><strong>Giới hạn tối đa mỗi ca:</strong> Có thể thêm nếu có ràng buộc không gian</li>
+                    <li><strong>Ca liên tiếp:</strong> Đảm bảo không có khoảng trống trong coverage</li>
+                </ul>
+                
+                <div class="important">
+                    <strong>⚠️ Lưu ý về ràng buộc 50%:</strong><br>
+                    Ràng buộc "không quá 50% tổng thời gian" trong đề bài có thể hiểu là:<br>
+                    - Mỗi ca không được vượt quá 50% tổng nhu cầu trong ngày<br>
+                    - Hoặc mỗi nhân viên không làm quá 50% tổng ca<br>
+                    <em>Cần làm rõ ý nghĩa này từ người ra đề.</em>
+                </div>
             </div>
         </div>
 
-        <div class="step-box">
-            <h2>📋 BƯỚC 4: NHU CẦU VÀ TÍNH TOÁN</h2>
+        <div class="section">
+            <h2>📝 4. Công thức Excel chi tiết</h2>
             
-            <h3>4.1. Nhập nhu cầu nhân lực (Dòng 14)</h3>
-            
-            <table class="excel-table">
-                <tr>
-                    <th>A14</th><th>B14</th><th>C14</th><th>D14</th><th>E14</th><th>F14</th><th>G14</th><th>H14</th><th>I14</th>
-                </tr>
-                <tr>
-                    <td><strong>Cần thiết</strong></td>
-                    <td class="highlight-blue">10</td><td class="highlight-blue">12</td><td class="highlight-blue">14</td><td class="highlight-blue">16</td>
-                    <td class="highlight-blue">18</td><td class="highlight-blue">17</td><td class="highlight-blue">15</td><td class="highlight-blue">10</td>
-                </tr>
-            </table>
-
-            <div class="formula-box">
-Nhập:
-A14: Cần thiết
-B14: 10  (9-10h cần 10 người)
-C14: 12  (10-11h cần 12 người)
-D14: 14  (11-12h cần 14 người)
-E14: 16  (12-13h cần 16 người)
-F14: 18  (13-14h cần 18 người)  
-G14: 17  (14-15h cần 17 người)
-H14: 15  (15-16h cần 15 người)
-I14: 10  (16-17h cần 10 người)
-            </div>
-
-            <h3>4.2. Tính số người thực tế phục vụ (Dòng 15) - SUMPRODUCT</h3>
-            
-            <table class="excel-table">
-                <tr>
-                    <th>A15</th><th>B15</th><th>C15</th><th>D15</th><th>E15</th><th>F15</th><th>G15</th><th>H15</th><th>I15</th>
-                </tr>
-                <tr>
-                    <td><strong>Thực tế có</strong></td>
-                    <td class="highlight-green">Công thức</td><td class="highlight-green">Công thức</td><td class="highlight-green">Công thức</td><td class="highlight-green">Công thức</td>
-                    <td class="highlight-green">Công thức</td><td class="highlight-green">Công thức</td><td class="highlight-green">Công thức</td><td class="highlight-green">Công thức</td>
-                </tr>
-            </table>
-
-            <div class="formula-box">
-QUAN TRỌNG! Nhập chính xác các công thức sau:
-
-A15: Thực tế có
-B15: =SUMPRODUCT($B$12:$F$12,B6:B10)
-C15: =SUMPRODUCT($B$12:$F$12,C6:C10)  
-D15: =SUMPRODUCT($B$12:$F$12,D6:D10)
-E15: =SUMPRODUCT($B$12:$F$12,E6:E10)
-F15: =SUMPRODUCT($B$12:$F$12,F6:F10)
-G15: =SUMPRODUCT($B$12:$F$12,G6:G10)
-H15: =SUMPRODUCT($B$12:$F$12,H6:H10)
-I15: =SUMPRODUCT($B$12:$F$12,I6:I10)
-            </div>
-
-            <div class="warning-box">
-                <strong>🔍 GIẢI THÍCH SUMPRODUCT:</strong><br><br>
+            <div class="important">
+                <h3>🔧 Template Excel hoàn chỉnh:</h3>
                 
-                <strong>SUMPRODUCT($B$12:$F$12, B6:B10)</strong> làm gì?<br>
-                
-                • <strong>$B$12:$F$12</strong> = [Số người Ca1, Ca2, Ca3, Ca4, Ca5]<br>
-                • <strong>B6:B10</strong> = [1,0,0,0,0] (cột 9-10h trong ma trận)<br>
-                
-                <strong>Tính toán:</strong><br>
-                = (Người Ca1 × 1) + (Người Ca2 × 0) + (Người Ca3 × 0) + (Người Ca4 × 0) + (Người Ca5 × 0)<br>
-                = Chỉ có Ca1 làm việc trong 9-10h<br><br>
-                
-                <strong>Tương tự với cột 10-11h:</strong><br>
-                • <strong>C6:C10</strong> = [1,1,0,0,0] <br>
-                = (Người Ca1 × 1) + (Người Ca2 × 1) + 0 + 0 + 0<br>
-                = Ca1 + Ca2 làm việc trong 10-11h
+                <h4>Dòng 6-13: Ma trận ca làm việc</h4>
+                <div class="formula">
+                A6: "Ca \ Giờ"    B6: "9-10"    C6: "10-11"    ...    I6: "16-17"<br>
+                A7: "Ca 1"        B7: 1         C7: 1          D7: 1    E7: 1    F7: 0    G7: 0    H7: 0    I7: 0<br>
+                A8: "Ca 2"        B8: 0         C8: 1          D8: 1    E8: 1    F8: 1    G8: 0    H8: 0    I8: 0<br>
+                A9: "Ca 3"        B9: 0         C9: 0          D9: 1    E9: 1    F9: 1    G9: 1    H9: 0    I9: 0<br>
+                A10: "Ca 4"       B10: 0        C10: 0         D10: 0   E10: 1   F10: 1   G10: 1   H10: 1   I10: 0<br>
+                A11: "Ca 5"       B11: 0        C11: 0         D11: 0   E11: 0   F11: 1   G11: 1   H11: 1   I11: 1
+                </div>
+
+                <h4>Dòng 15: Biến quyết định</h4>
+                <div class="formula">
+                A15: "Số người"   B15: 0        C15: 0         D15: 0   E15: 0   F15: 0
+                </div>
+
+                <h4>Dòng 16: Nhu cầu</h4>
+                <div class="formula">
+                A16: "Cần thiết"  B16: 10       C16: 12        D16: 14  E16: 16  F16: 18  G16: 17  H16: 15  I16: 10
+                </div>
+
+                <h4>Dòng 17: Công suất thực tế (SUMPRODUCT)</h4>
+                <div class="formula">
+                A17: "Thực tế"<br>
+                B17: =SUMPRODUCT($B$15:$F$15,B7:F11)<br>
+                C17: =SUMPRODUCT($B$15:$F$15,C7:G11)<br>
+                D17: =SUMPRODUCT($B$15:$F$15,D7:H11)<br>
+                E17: =SUMPRODUCT($B$15:$F$15,E7:I11)<br>
+                F17: =SUMPRODUCT($B$15:$F$15,F7:F11)<br>
+                G17: =SUMPRODUCT($B$15:$F$15,G7:G11)<br>
+                H17: =SUMPRODUCT($B$15:$F$15,H7:H11)<br>
+                I17: =SUMPRODUCT($B$15:$F$15,I7:I11)
+                </div>
+
+                <h4>Ô J15: Tổng nhân viên (Hàm mục tiêu)</h4>
+                <div class="formula">
+                J15: =SUM(B15:F15)
+                </div>
             </div>
         </div>
 
-        <div class="step-box">
-            <h2>🎯 BƯỚC 5: HÀM MỤC TIÊU</h2>
+        <div class="section">
+            <h2>🚀 5. Hướng dẫn chạy Solver</h2>
             
-            <h3>5.1. Tạo ô tổng nhân viên</h3>
-            
-            <table class="excel-table">
-                <tr>
-                    <th>G12</th><th>H12</th>
-                </tr>
-                <tr>
-                    <td><strong>Tổng nhân viên</strong></td>
-                    <td class="highlight-yellow">=SUM(B12:F12)</td>
-                </tr>
-            </table>
-
-            <div class="formula-box">
-Nhập:
-G12: Tổng nhân viên  
-H12: =SUM(B12:F12)
+            <div class="step">
+                <h3>Bước 1: Mở Solver</h3>
+                <p>Data → Solver (nếu chưa có thì cài add-in Solver)</p>
             </div>
 
-            <div class="success-box">
-                <strong>✅ Đây chính là HÀM MỤC TIÊU!</strong><br>
-                Solver sẽ cố gắng làm cho H12 có giá trị nhỏ nhất (MIN)
-            </div>
-        </div>
-
-        <div class="step-box">
-            <h2>⚙️ BƯỚC 6: THIẾT LẬP SOLVER</h2>
-            
-            <h3>6.1. Mở Solver</h3>
-            <div class="solver-settings">
-                <strong>Cách 1:</strong> Data tab → Solver (nếu có)<br>
-                <strong>Cách 2:</strong> Nếu không thấy Solver:<br>
-                • File → Options → Add-ins<br>
-                • Manage: Excel Add-ins → Go<br>
-                • Tick ✅ Solver Add-in → OK
+            <div class="step">
+                <h3>Bước 2: Thiết lập tham số</h3>
+                <ul>
+                    <li><strong>Set Objective:</strong> $J$15 (tổng nhân viên)</li>
+                    <li><strong>To:</strong> Min (tối thiểu hóa)</li>
+                    <li><strong>By Changing Variable Cells:</strong> $B$15:$F$15</li>
+                </ul>
             </div>
 
-            <div class="screenshot-placeholder">
-                [Ảnh screenshot menu Data → Solver sẽ ở đây]
+            <div class="step">
+                <h3>Bước 3: Thêm ràng buộc</h3>
+                <ul>
+                    <li>Add: $B$17:$I$17 >= $B$16:$I$16 (đảm bảo đủ nhân lực)</li>
+                    <li>Add: $B$15:$F$15 >= 0 (không âm)</li>
+                    <li>Add: $B$15:$F$15 = integer (số nguyên)</li>
+                </ul>
             </div>
 
-            <h3>6.2. Thiết lập Solver Parameters</h3>
-            
-            <div class="solver-settings">
-                <strong>🎯 Set Objective:</strong> <code class="code-inline">$H$12</code><br>
-                <em>(Ô chứa tổng nhân viên)</em><br><br>
-                
-                <strong>📉 To:</strong> <strong>Min</strong> (Chọn Min)<br>
-                <em>(Tối thiểu hóa)</em><br><br>
-                
-                <strong>🔧 By Changing Variable Cells:</strong> <code class="code-inline">$B$12:$F$12</code><br>
-                <em>(5 ô chứa số người mỗi ca)</em>
+            <div class="step">
+                <h3>Bước 4: Chọn phương pháp giải</h3>
+                <p>Select Solving Method: <strong>Simplex LP</strong> (vì đây là bài toán tuyến tính)</p>
             </div>
 
-            <h3>6.3. Thêm Constraints (Ràng buộc)</h3>
-            
-            <div class="solver-settings">
-                <strong>Click "Add" để thêm từng ràng buộc:</strong><br><br>
-                
-                <strong>Ràng buộc 1:</strong> Đảm bảo đủ nhân lực<br>
-                • Cell Reference: <code class="code-inline">$B$15:$I$15</code><br>
-                • Operator: <strong>>=</strong><br>  
-                • Constraint: <code class="code-inline">$B$14:$I$14</code><br>
-                <em>(Số người thực tế >= Số người cần thiết)</em><br><br>
-                
-                <strong>Ràng buộc 2:</strong> Không âm<br>
-                • Cell Reference: <code class="code-inline">$B$12:$F$12</code><br>
-                • Operator: <strong>>=</strong><br>
-                • Constraint: <code class="code-inline">0</code><br><br>
-                
-                <strong>Ràng buộc 3:</strong> Số nguyên<br>
-                • Cell Reference: <code class="code-inline">$B$12:$F$12</code><br>
-                • Operator: <strong>int</strong> (integer)<br>
-                • Constraint: <em>(để trống)</em>
-            </div>
-
-            <h3>6.4. Chọn Solving Method</h3>
-            
-            <div class="solver-settings">
-                <strong>Select Solving Method:</strong> <strong>Simplex LP</strong><br>
-                <em>(Vì đây là bài toán tuyến tính)</em>
-            </div>
-
-            <h3>6.5. Solve!</h3>
-            
-            <div class="solver-settings">
-                • Click <strong>"Solve"</strong><br>
-                • Đợi vài giây...<br>
-                • Khi có kết quả, chọn <strong>"Keep Solver Solution"</strong><br>
-                • Click <strong>"OK"</strong>
+            <div class="step">
+                <h3>Bước 5: Solve</h3>
+                <p>Click <strong>Solve</strong> và chọn <strong>Keep Solver Solution</strong></p>
             </div>
         </div>
 
-        <div class="step-box">
-            <h2>📊 BƯỚC 7: PHÂN TÍCH KẾT QUẢ</h2>
+        <div class="section">
+            <h2>📈 6. Phân tích kết quả dự kiến</h2>
             
-            <h3>7.1. Kiểm tra kết quả</h3>
-            
-            <div class="success-box">
-                <strong>✅ Kết quả mong đợi (ví dụ):</strong><br>
-                • Ca 1: 4 người<br>
-                • Ca 2: 6 người<br>  
-                • Ca 3: 8 người<br>
-                • Ca 4: 5 người<br>
-                • Ca 5: 2 người<br>
-                <strong>→ Tổng: 25 người</strong>
-            </div>
-
-            <h3>7.2. Verify tính đúng đắn</h3>
-            
-            <table class="excel-table">
-                <tr>
-                    <th>Khung giờ</th><th>Cần thiết</th><th>Thực tế có</th><th>Status</th>
-                </tr>
-                <tr>
-                    <td>9-10</td><td>10</td><td class="highlight-green">≥10</td><td>✅ OK</td>
-                </tr>
-                <tr>
-                    <td>10-11</td><td>12</td><td class="highlight-green">≥12</td><td>✅ OK</td>
-                </tr>
-                <tr>
-                    <td>11-12</td><td>14</td><td class="highlight-green">≥14</td><td>✅ OK</td>
-                </tr>
-                <tr>
-                    <td>...</td><td>...</td><td>...</td><td>...</td>
-                </tr>
-            </table>
-
-            <div class="warning-box">
-                <strong>⚠️ Nếu Solver báo lỗi "No Feasible Solution":</strong><br>
-                • Kiểm tra lại ma trận ca làm việc<br>
-                • Kiểm tra lại công thức SUMPRODUCT<br>
-                • Đảm bảo nhu cầu không quá cao so với khả năng cung cấp
+            <div class="important">
+                <h3>🎯 Kết quả tối ưu dự kiến:</h3>
+                <table>
+                    <tr>
+                        <th>Ca làm việc</th>
+                        <th>Số người</th>
+                        <th>Giải thích</th>
+                    </tr>
+                    <tr><td>Ca 1 (9-13h)</td><td>4-6</td><td>Đáp ứng nhu cầu sáng</td></tr>
+                    <tr><td>Ca 2 (10-14h)</td><td>6-8</td><td>Tăng cường giờ cao điểm</td></tr>
+                    <tr><td>Ca 3 (11-15h)</td><td>8-10</td><td>Ca chính giờ cao điểm</td></tr>
+                    <tr><td>Ca 4 (12-16h)</td><td>6-8</td><td>Duy trì buổi chiều</td></tr>
+                    <tr><td>Ca 5 (13-17h)</td><td>4-6</td><td>Đáp ứng cuối giờ</td></tr>
+                </table>
+                
+                <p><strong>Tổng nhân viên tối thiểu:</strong> Khoảng 28-38 người</p>
             </div>
         </div>
 
-        <div class="step-box">
-            <h2>🎯 BƯỚC 8: TỐI ỮU HÓA THÊM</h2>
+        <div class="section">
+            <h2>💡 7. Mẹo tối ưu hóa</h2>
             
-            <h3>8.1. Sensitivity Analysis</h3>
-            
-            <div class="solver-settings">
-                <strong>Sau khi có kết quả trong Solver:</strong><br>
-                • Click <strong>"Reports"</strong><br>
-                • Chọn <strong>"Sensitivity"</strong> và <strong>"Answer"</strong><br>
-                • Click <strong>"OK"</strong><br>
-                → Excel sẽ tạo sheet mới với phân tích chi tiết
+            <div class="step">
+                <h3>🔍 Sensitivity Analysis</h3>
+                <p>Sau khi có kết quả, kiểm tra:</p>
+                <ul>
+                    <li>Shadow Price của mỗi ràng buộc</li>
+                    <li>Allowable Increase/Decrease</li>
+                    <li>Binding/Non-binding constraints</li>
+                </ul>
             </div>
 
-            <h3>8.2. Thử các Scenario khác</h3>
-            
-            <div class="formula-box">
-Thử thay đổi:
-• Nhu cầu trong giờ cao điểm (tăng 13-14h lên 20 người)
-• Thêm ca mới (Ca 6: 14-18h)  
-• Giảm thời gian ca (từ 4h xuống 3h)
+            <div class="step">
+                <h3>🎛️ Scenario Analysis</h3>
+                <p>Thử các kịch bản:</p>
+                <ul>
+                    <li>Tăng/giảm nhu cầu trong giờ cao điểm</li>
+                    <li>Thay đổi độ dài ca làm việc</li>
+                    <li>Thêm/bớt ca làm việc</li>
+                </ul>
+            </div>
+
+            <div class="important">
+                <h3>⚠️ Lưu ý quan trọng:</h3>
+                <ul>
+                    <li>Kiểm tra tính khả thi của lời giải</li>
+                    <li>Đảm bảo không vi phạm quy định lao động</li>
+                    <li>Cân nhắc yếu tố thực tế như nghỉ phép, ốm đau</li>
+                    <li>Backup cho trường hợp có biến động đột xuất</li>
+                </ul>
             </div>
         </div>
-
-        <div class="step-box">
-            <h2>❗ TROUBLESHOOTING</h2>
-            
-            <div class="warning-box">
-                <strong>🔧 Lỗi thường gặp:</strong><br><br>
-                
-                <strong>1. "The Set Objective cell must contain a formula"</strong><br>
-                → Ô H12 phải có công thức =SUM(B12:F12)<br><br>
-                
-                <strong>2. "Solver could not find a feasible solution"</strong><br>
-                → Kiểm tra ràng buộc quá chặt, hoặc ma trận sai<br><br>
-                
-                <strong>3. SUMPRODUCT trả về #VALUE!</strong><br>
-                → Kiểm tra range có cùng kích thước không<br><br>
-                
-                <strong>4. Kết quả có số thập phân</strong><br>
-                → Đảm bảo đã thêm ràng buộc "int" (integer)
-            </div>
-
-            <div class="success-box">
-                <strong>✅ Kiểm tra cuối cùng:</strong><br>
-                • Tất cả ô B15:I15 >= B14:I14 ✓<br>
-                • Tất cả B12:F12 là số nguyên ✓<br>
-                • H12 = tổng tối thiểu
+    </div>
+</body>
+</html>
