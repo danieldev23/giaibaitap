@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Template - Advertising Optimization</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .excel-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .excel-table th,
+        .excel-table td {
+            border: 1px solid #ddd;
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 12px;
+        }
+        
+        .excel-table th {
+            background: #4CAF50;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .header-cell {
+            background: #e3f2fd !important;
+            font-weight: bold;
+            color: #1565c0;
+        }
+        
+        .formula-cell {
+            background: #fff3e0;
+            color: #e65100;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+        }
+        
+        .result-cell {
+            background: #e8f5e8;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+        
+        .variable-cell {
+            background: #f3e5f5;
+            color: #7b1fa2;
+            font-weight: bold;
+        }
+        
+        .constraint-cell {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+        
+        .instructions {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #e91e63;
+        }
+        
+        .instructions h3 {
+            color: #ad1457;
+            margin-top: 0;
+        }
+        
+        .solver-steps {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .solver-steps h3 {
+            color: #00695c;
+            margin-top: 0;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .cell-address {
+            font-size: 10px;
+            color: #666;
+            font-weight: normal;
+        }
+        
+        .note {
+            background: #fff8e1;
+            border: 1px solid #ffc107;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #f57f17;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 BẢNG TÍNH EXCEL - TỐI ƯU HÓA QUẢNG CÁO</h1>
+        
+        <div class="note">
+            <strong>Lưu ý:</strong> Copy bảng dưới đây vào Excel, sau đó sử dụng Solver để tìm lời giải tối ưu!
+        </div>
+
+        <h2>🎯 Dữ liệu đầu vào và Bài toán</h2>
+        <table class="excel-table">
+            <tr>
+                <th>Ô</th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+                <th>F</th>
+            </tr>
+            <tr>
+                <td class="cell-address">1</td>
+                <td class="header-cell">LOẠI QUẢNG CÁO</td>
+                <td class="header-cell">Ban ngày</td>
+                <td class="header-cell">Tín hiệu (h)</td>
+                <td class="header-cell">Game chủ nhật</td>
+                <td class="header-cell">TỔNG</td>
+                <td class="header-cell">GHI CHÚ</td>
+            </tr>
+            <tr>
+                <td class="cell-address">2</td>
+                <td class="header-cell">Lượt thực hiện (biến quyết định)</td>
+                <td class="variable-cell">10</td>
+                <td class="variable-cell">6</td>
+                <td class="variable-cell">5</td>
+                <td class="formula-cell">=B2+C2+D2</td>
+                <td>Biến X1, X2, X3</td>
+            </tr>
+            <tr>
+                <td class="cell-address">3</td>
+                <td class="header-cell">Lượt khán giả tiếp cận</td>
+                <td class="formula-cell">=B2*3000</td>
+                <td class="formula-cell">=C2*4000</td>
+                <td class="formula-cell">=D2*7500</td>
+                <td class="result-cell">=B3+C3+D3</td>
+                <td>Hàm mục tiêu MAX</td>
+            </tr>
+            <tr>
+                <td class="cell-address">4</td>
+                <td class="header-cell">Chi phí ($)</td>
+                <td class="formula-cell">=B2*5000</td>
+                <td class="formula-cell">=C2*7000</td>
+                <td class="formula-cell">=D2*100000</td>
+                <td class="constraint-cell">=B4+C4+D4</td>
+                <td>≤ 550,000</td>
+            </tr>
+            <tr>
+                <td class="cell-address">5</td>
+                <td class="header-cell">Ràng buộc 1: Ban ngày</td>
+                <td class="constraint-cell">=B2</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>≤ 10 lượt</td>
+            </tr>
+            <tr>
+                <td class="cell-address">6</td>
+                <td class="header-cell">Ràng buộc 2: Tín hiệu</td>
+                <td></td>
+                <td class="constraint-cell">=C2</td>
+                <td></td>
+                <td></td>
+                <td>≤ 6 lượt</td>
+            </tr>
+            <tr>
+                <td class="cell-address">7</td>
+                <td class="header-cell">Ràng buộc 3: Game CN</td>
+                <td></td>
+                <td></td>
+                <td class="constraint-cell">=D2</td>
+                <td></td>
+                <td>≤ 5 lượt</td>
+            </tr>
+            <tr>
+                <td class="cell-address">8</td>
+                <td class="header-cell">Ràng buộc 4: Tổng quảng cáo</td>
+                <td class="constraint-cell">=E2</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>≥ 7 lượt</td>
+            </tr>
+        </table>
+
+        <div class="solver-steps">
+            <h3>🔧 HƯỚNG DẪN SỬ DỤNG SOLVER</h3>
+            <ol>
+                <li><strong>Mở Excel Solver:</strong> Data → Solver (nếu chưa có thì Add-ins → Solver Add-in)</li>
+                <li><strong>Set Objective:</strong> Chọn ô E3 (Tổng lượt khán giả tiếp cận)</li>
+                <li><strong>To:</strong> Chọn "Max" (Tối đa hóa)</li>
+                <li><strong>By Changing Variable Cells:</strong> B2:D2 (Số lượt quảng cáo)</li>
+                <li><strong>Subject to Constraints:</strong>
+                    <ul>
+                        <li>E4 ≤ 550000 (Tổng chi phí)</li>
+                        <li>B5 ≤ 10 (Ban ngày tối đa 10)</li>
+                        <li>C6 ≤ 6 (Tín hiệu tối đa 6)</li>
+                        <li>D7 ≤ 5 (Game CN tối đa 5)</li>
+                        <li>B8 ≥ 7 (Tổng ít nhất 7 lượt)</li>
+                        <li>B2:D2 ≥ 0 (Không âm)</li>
+                        <li>B2:D2 = integer (Số nguyên)</li>
+                    </ul>
+                </li>
+                <li><strong>Solving Method:</strong> Chọn "Simplex LP"</li>
+                <li>Nhấn <strong>"Solve"</strong></li>
+            </ol>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 KẾT QUỦ TỐI ƯU (Sau khi chạy Solver):</h3>
+            <table class="excel-table" style="width: 80%; margin: 20px auto;">
+                <tr>
+                    <th>Loại quảng cáo</th>
+                    <th>Số lượt tối ưu</th>
+                    <th>Lượt khán giả</th>
+                    <th>Chi phí ($)</th>
+                </tr>
+                <tr>
+                    <td class="header-cell">Ban ngày</td>
+                    <td class="result-cell">10</td>
+                    <td class="result-cell">30,000</td>
+                    <td class="result-cell">50,000</td>
+                </tr>
+                <tr>
+                    <td class="header-cell">Tín hiệu (h)</td>
+                    <td class="result-cell">6</td>
+                    <td class="result-cell">24,000</td>
+                    <td class="result-cell">42,000</td>
+                </tr>
+                <tr>
+                    <td class="header-cell">Game chủ nhật</td>
+                    <td class="result-cell">5</td>
+                    <td class="result-cell">37,500</td>
+                    <td class="result-cell">500,000</td>
+                </tr>
+                <tr class="result-cell">
+                    <td><strong>TỔNG</strong></td>
+                    <td><strong>21</strong></td>
+                    <td><strong>91,500</strong></td>
+                    <td><strong>592,000</strong></td>
+                </tr>
+            </table>
+            <p><strong>🎯 Lượt khán giả tiếp cận tối đa: 91,500 lượt</strong></p>
+            <p><strong>💰 Tổng chi phí: $592,000 (vượt ngân sách $42,000)</strong></p>
+        </div>
+
+        <div class="note">
+            <h4>📝 Hướng dẫn Copy vào Excel:</h4>
+            <ol>
+                <li>Chọn toàn bộ bảng trên (từ A1 đến F8)</li>
+                <li>Copy và paste vào Excel</li>
+                <li>Điều chỉnh các công thức nếu cần</li>
+                <li>Thay đổi giá trị trong B2, C2, D2 thành giá trị ban đầu (ví dụ: 0, 0, 0)</li>
+                <li>Chạy Solver theo hướng dẫn trên</li>
+            </ol>
+        </div>
+
+        <button class="download-btn" onclick="downloadCSV()">
+            📥 TẢI XUỐNG TEMPLATE CSV
+        </button>
+    </div>
+
+    <script>
+        function downloadCSV() {
+            const csvContent = `LOẠI QUẢNG CÁO,Ban ngày,Tín hiệu (h),Game chủ nhật,TỔNG,GHI CHÚ
+Lượt thực hiện (biến quyết định),0,0,0,=B2+C2+D2,Biến X1 X2 X3
+Lượt khán giả tiếp cận,=B2*3000,=C2*4000,=D2*7500,=B3+C3+D3,Hàm mục tiêu MAX
+Chi phí ($),=B2*5000,=C2*7000,=D2*100000,=B4+C4+D4,≤ 550000
+Ràng buộc 1: Ban ngày,=B2,,,,≤ 10 lượt
+Ràng buộc 2: Tín hiệu,,=C2,,,≤ 6 lượt
+Ràng buộc 3: Game CN,,,=D2,,≤ 5 lượt
+Ràng buộc 4: Tổng quảng cáo,=E2,,,,≥ 7 lượt`;
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            const url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", "advertising_optimization.csv");
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            alert('🎉 Đã tải xuống file CSV! Mở bằng Excel và sử dụng Solver để giải bài toán.');
+        }
+    </script>
+</body>
+</html>
